@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import supportedLanguages from "@/lib/supportedLanguages";
 import { ChevronDown } from "lucide-react";
+import { SupportedLanguagesDropdownProps } from "@/types";
 
 export function SupportedLanguagesDropdown({
   handleLanguageChange,
