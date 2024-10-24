@@ -1,7 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import Prism from "prismjs";
+import { useState, useEffect, useRef } from "react";
 import "prismjs/themes/prism-okaidia.css";
+import "prismjs/plugins/line-numbers/prism-line-numbers.js";
+import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 
 import highlight from "../components/codeHighlight";
 import { SupportedLanguagesDropdown } from "@/components/ui/languages-radio-group";
@@ -16,8 +19,7 @@ export default function Home() {
   const [code, setCode] = useState(
     `const greet = () => { console.log("Hello, World!"); };`
   );
-  const [highlightedCode, setHighlightedCode] = useState("");
-
+  const codeBlockRef = useRef<HTMLElement | null>(null);
   const handleLanguageChange = (languageValue: string) => {
     const selectedLanguage = supportedLanguages.find(
       (lang) => lang.value === languageValue
@@ -28,7 +30,10 @@ export default function Home() {
   };
 
   useEffect(() => {
-    setHighlightedCode(highlight(code, currentLanguage.value));
+    if (codeBlockRef.current) {
+      codeBlockRef.current.innerHTML = highlight(code, currentLanguage.value);
+      Prism.highlightElement(codeBlockRef.current);
+    }
   }, [code, currentLanguage]);
 
   return (
@@ -48,23 +53,21 @@ export default function Home() {
         currentLanguage={currentLanguage}
       />
 
-      <div className="flex flex-col gap-6 mt-2">
+      <div className="flex flex-col md:flex-row gap-6 mt-2 h-[70dvh]">
         <textarea
-          className="w-full min-h-64 p-2 border rounded"
+          className="min-h-96 h-full p-2 border rounded resize-none w-full md:max-w-1/2 md:w-1/2"
           value={code}
           onChange={(e) => setCode(e.target.value)}
           placeholder="Type or paste your code here..."
         ></textarea>
 
-        <div className="w-full">
+        <div className={`h-full w-full md:max-w-1/2 md:w-1/2 line-numbers`}>
           <pre
-            className={`min-h-64 max-h-[450px] overflow-scroll focus-visible:outline-0 !m-0 language-${currentLanguage.value}`}
+            className={`h-full overflow-scroll focus-visible:outline-0 !m-0 line-numbers language-${currentLanguage.value}`}
           >
             <code
+              ref={codeBlockRef} // Attach the ref to the code block
               className={`language-${currentLanguage.value}`}
-              dangerouslySetInnerHTML={{
-                __html: highlightedCode,
-              }}
             ></code>
           </pre>
         </div>
