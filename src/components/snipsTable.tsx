@@ -37,7 +37,8 @@ const snippets = [
     name: "Database Connection",
     language: "SQL",
     createdAt: "2024-10-17",
-    description: "Establishes a connection to a PostgreSQL database.",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   },
 ];
 
@@ -46,15 +47,17 @@ const SnipsTable = () => {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Name</TableHead>
-          <TableHead>Language</TableHead>
-          <TableHead>Created At</TableHead>
-          <TableHead>Description</TableHead>
+          <TableHead>No</TableHead>
+          <TableHead className="min-w-[220px]">Name</TableHead>
+          <TableHead className="min-w-[120px]">Language</TableHead>
+          <TableHead className="min-w-[150px]">Created At</TableHead>
+          <TableHead className="min-w-[300px]">Description</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {snippets.map((snippet) => (
+        {snippets.map((snippet, index) => (
           <TableRow key={snippet.id}>
+            <TableCell>{index + 1}.</TableCell>
             <TableCell className="font-medium">{snippet.name}</TableCell>
             <TableCell>{snippet.language}</TableCell>
             <TableCell>{snippet.createdAt}</TableCell>
