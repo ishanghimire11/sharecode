@@ -3,8 +3,12 @@ import { ModeToggle } from "./theme-toggle";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
+import { SignInButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
-const Navbar = () => {
+const Navbar = async () => {
+  const { userId } = await auth();
   return (
     <div>
       <div className="flex items-center gap-x-4 border-b p-2 mb-2 justify-between">
@@ -19,7 +23,11 @@ const Navbar = () => {
         </Link>
 
         <div className="flex items-center gap-x-2">
-          <Button variant={"default"}>Login</Button>
+          {userId && (
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+          )}
           <ModeToggle />
         </div>
       </div>
