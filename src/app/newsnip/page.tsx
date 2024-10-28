@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import axios from "axios";
 
 import Prism from "prismjs";
 import { useState, useEffect, useRef } from "react";
@@ -16,6 +17,7 @@ import highlight from "@/components/codeHighlight";
 
 import { SaveSnipModal } from "@/components/SaveSnipModal";
 import { Textarea } from "@/components/ui/textarea";
+import { INewSnip } from "@/types";
 import { useRouter } from "next/navigation";
 
 const NewSnip = () => {
@@ -41,18 +43,20 @@ const NewSnip = () => {
     }
   };
 
-  function onFormSubmit(values: FormValues) {
-    const formData = {
+  const onFormSubmit = async (values: FormValues) => {
+    const newSnip: INewSnip = {
       ...values,
-      createdAt: new Date(),
-      language: currentLanguage,
+      language: currentLanguage.label,
       code: code,
     };
 
-    console.log(formData);
-
+    const res = await axios.post("/api/snip", newSnip);
+    if (res.status === 400) {
+      console.error("Error saving snip:", res.data.error);
+      return;
+    }
     navigate.push("/");
-  }
+  };
 
   useEffect(() => {
     if (codeBlockRef.current) {

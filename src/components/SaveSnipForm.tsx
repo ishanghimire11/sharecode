@@ -18,7 +18,7 @@ import { Textarea } from "./ui/textarea";
 import { NewSnipFormProps } from "@/types";
 
 const formSchema = z.object({
-  snipName: z.string().min(2, {
+  name: z.string().min(2, {
     message: "Name must be at least 2 characters.",
   }),
   description: z
@@ -35,7 +35,7 @@ export function SaveSnipForm({ onFormSubmit }: NewSnipFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      snipName: "",
+      name: "",
       description: "",
     },
   });
@@ -45,7 +45,7 @@ export function SaveSnipForm({ onFormSubmit }: NewSnipFormProps) {
       <form onSubmit={form.handleSubmit(onFormSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="snipName"
+          name="name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Name</FormLabel>

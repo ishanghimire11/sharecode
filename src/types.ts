@@ -6,7 +6,7 @@ export type SupportedLanguagesDropdownProps = {
 };
 
 export type SnipForm = {
-  snipName: string;
+  name: string;
   description: string;
 };
 
@@ -16,4 +16,9 @@ export type onFormSubmitProps = {
 
 export interface NewSnipFormProps {
   onFormSubmit: (values: FormValues) => void;
+}
+
+export interface INewSnip extends FormValues {
+  code: string;
+  language: string;
 }
