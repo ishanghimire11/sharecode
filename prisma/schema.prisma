@@ -29,7 +29,7 @@ model SnipData {
   createdAt   DateTime @default(now())
   description String
   language    String
-  name        String   @unique
+  name        String
   userId      String
   user        User     @relation(fields: [userId], references: [clerkUserId])
 }

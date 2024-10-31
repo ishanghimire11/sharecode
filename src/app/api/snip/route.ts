@@ -1,32 +1,6 @@
-import prisma from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
-
-export async function GET() {
-  try {
-    const { userId } = await auth();
-
-    if (!userId) {
-      return NextResponse.json({ error: "unauthorized" }, { status: 401 });
-    }
-
-    const snippets = await prisma.snipData.findMany({
-      where: { userId },
-      orderBy: { createdAt: "desc" },
-    });
-
-    return NextResponse.json(snippets);
-  } catch (error) {
-    if (error instanceof Error && error.message === "No user ID found") {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    return NextResponse.json(
-      { error: "An unexpected error occurred" },
-      { status: 500 }
-    );
-  }
-}
+import { auth } from "@clerk/nextjs/server";
+import prisma from "@/lib/db";
 
 export async function POST(request: NextRequest) {
   const { userId } = await auth();

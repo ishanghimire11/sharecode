@@ -50,8 +50,6 @@ const NewSnip = () => {
       code: code,
     };
 
-    console.log(newSnip);
-
     const res = await axios.post(`/api/snip`, newSnip);
     if (res.status === 400) {
       console.error("Error saving snip:", res.data.error);
