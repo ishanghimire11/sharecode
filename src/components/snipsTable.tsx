@@ -15,7 +15,7 @@ import { formatDate } from "@/lib/utils";
 import axios from "axios";
 
 const SnipsTable = async () => {
-  const res = await axios.get(`${process.env.SERVER_URL}/api/snip`);
+  const res = await axios.get(`/api/snip`);
   const snippets = res.data;
 
   if (res.status !== 200 || !Array.isArray(snippets)) {
