@@ -6,20 +6,17 @@ export async function GET() {
   try {
     const { userId } = await auth();
 
-    console.log(`User ID retrieved: ${userId}`);
-
     if (!userId) {
       return NextResponse.json({ error: "unauthorized" }, { status: 401 });
     }
 
     const snippets = await prisma.snipData.findMany({
-      where: { id: userId },
+      where: { userId },
+      orderBy: { createdAt: "desc" },
     });
 
     return NextResponse.json(snippets);
   } catch (error) {
-    console.error("Error in GET function:", error);
-
     if (error instanceof Error && error.message === "No user ID found") {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
