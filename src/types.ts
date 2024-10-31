@@ -22,3 +22,21 @@ export interface INewSnip extends FormValues {
   code: string;
   language: string;
 }
+
+export interface SnipData {
+  id: string;
+  code: string;
+  createdAt: Date;
+  description: string;
+  language: string;
+  name: string;
+  userId: string;
+  user: {
+    clerkUserId: string;
+  };
+}
+
+export type SnipDataArray = {
+  snippet: SnipData[];
+  index: number;
+};
