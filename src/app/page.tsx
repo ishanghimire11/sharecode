@@ -23,6 +23,8 @@ const Home = async () => {
     where: { clerkUserId: user.id },
   });
 
+  console.log(loggedinUser);
+
   if (!loggedinUser) {
     await prisma.user.create({
       data: {
