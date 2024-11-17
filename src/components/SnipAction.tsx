@@ -29,7 +29,6 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { CopySnipUrlDialogProps, DeleteSnipDialogProps } from "@/types";
 import { Cross1Icon } from "@radix-ui/react-icons";
-import { Form } from "react-hook-form";
 import { Input } from "./ui/input";
 
 function DeleteSnipDialog({
