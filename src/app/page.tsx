@@ -1,12 +1,12 @@
-import React from "react";
+import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { currentUser } from "@clerk/nextjs/server";
-
-import Dashboard from "./dashboard/page";
-import { SignInButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
+import { SignInButton } from "@clerk/nextjs";
 import prisma from "@/lib/db";
 import Link from "next/link";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import React from "react";
+
+import Dashboard from "./dashboard/page";
 
 const Home = async () => {
   const user = await currentUser();

@@ -1,6 +1,3 @@
-import React from "react";
-import Link from "next/link";
-
 import {
   Card,
   CardContent,
@@ -9,9 +6,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { PlusIcon } from "lucide-react";
+import Link from "next/link";
+import React from "react";
+
 import SnipsTable from "./snipsTable";
 import { Button } from "./ui/button";
-import { PlusIcon } from "lucide-react";
 
 const SavedSnips = () => {
   return (

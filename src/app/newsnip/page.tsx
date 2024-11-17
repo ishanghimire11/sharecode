@@ -43,6 +43,22 @@ const NewSnip = () => {
     }
   };
 
+  // const onFormSubmit = async (values: FormValues) => {
+  //   const newSnip: INewSnip = {
+  //     ...values,
+  //     language: currentLanguage.label,
+  //     code: code,
+  //   };
+
+  //   const res = await axios.post(`/api/snip`, newSnip);
+  //   if (res.status === 400) {
+  //     console.error("Error saving snip:", res.data.error);
+  //     return;
+  //   }
+
+  //   navigate.push("/");
+  // };
+
   const onFormSubmit = async (values: FormValues) => {
     const newSnip: INewSnip = {
       ...values,
@@ -50,13 +66,19 @@ const NewSnip = () => {
       code: code,
     };
 
-    const res = await axios.post(`/api/snip`, newSnip);
-    if (res.status === 400) {
-      console.error("Error saving snip:", res.data.error);
-      return;
-    }
+    try {
+      const res = await axios.post(`/api/snip`, newSnip);
 
-    navigate.push("/");
+      if (res.status !== 201 && res.status !== 200) {
+        console.error("Error saving snip:", res.data.error);
+        return;
+      }
+
+      const createdSnip = res.data; // TypeScript ensures this is an ISnip
+      navigate.push(`/?newSnipId=${createdSnip.id}`);
+    } catch (error) {
+      console.error("Error saving snip:", error);
+    }
   };
 
   useEffect(() => {

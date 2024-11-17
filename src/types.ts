@@ -52,3 +52,18 @@ export type CopySnipUrlDialogProps = {
   setOpen: (open: boolean) => void;
   snipID: string;
 };
+
+export interface Snip {
+  id: string;
+  name: string;
+  description: string;
+  language: string;
+  code: string;
+  createdAt: string;
+}
+
+export interface SnipTablesProps {
+  searchParams?: {
+    newSnipId?: string;
+  };
+}

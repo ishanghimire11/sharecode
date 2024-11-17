@@ -1,7 +1,6 @@
-// File: /api/delete/[snipId]/route.ts
-
-import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
+// File: /api/delete/[snipId]/route.ts
+import prisma from "@/lib/db";
 
 export async function DELETE(
   request: Request,
@@ -9,9 +8,7 @@ export async function DELETE(
 ) {
   try {
     const { snipId } = params;
-    console.log(snipId, "delete snip id");
 
-    // Example deletion logic with Prisma
     await prisma.snipData.delete({
       where: { id: snipId },
     });

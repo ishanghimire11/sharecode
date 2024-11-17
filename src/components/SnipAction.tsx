@@ -121,12 +121,9 @@ const SnipAction = ({ snipId }: { snipId: string }) => {
     e.preventDefault();
 
     try {
-      console.log(snipId, "snipid snipid");
       const res = await axios.delete(`/api/delete/${snipId}`);
-      console.log(res);
 
       if (res.status === 200) {
-        console.log("Snippet deleted successfully");
         setOpenDeleteDialog(false);
         navigate.refresh();
       }

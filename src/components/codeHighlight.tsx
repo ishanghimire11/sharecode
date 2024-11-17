@@ -2,7 +2,6 @@
 
 import Prism from "prismjs";
 
-// Import all the language components you need
 import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-python";
 import "prismjs/components/prism-java";

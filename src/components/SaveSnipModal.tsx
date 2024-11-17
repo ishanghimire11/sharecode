@@ -1,6 +1,3 @@
-import React from "react";
-
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,10 +6,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
-import { Save } from "lucide-react";
-import { SaveSnipForm } from "./SaveSnipForm";
+import { Button } from "@/components/ui/button";
 import { NewSnipFormProps } from "@/types";
+import { Save } from "lucide-react";
+import React from "react";
+
+import { SaveSnipForm } from "./SaveSnipForm";
 
 export function SaveSnipModal({ onFormSubmit }: NewSnipFormProps) {
   return (

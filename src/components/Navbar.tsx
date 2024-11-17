@@ -1,9 +1,10 @@
-import React from "react";
-import { ModeToggle } from "./theme-toggle";
-import Link from "next/link";
+import { SignedIn, UserButton } from "@clerk/nextjs";
 import { ExternalLink } from "lucide-react";
 import { auth } from "@clerk/nextjs/server";
-import { SignedIn, UserButton } from "@clerk/nextjs";
+import Link from "next/link";
+import React from "react";
+
+import { ModeToggle } from "./theme-toggle";
 
 const Navbar = async () => {
   const { userId } = await auth();
