@@ -9,11 +9,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ExternalLinkIcon } from "lucide-react";
-import { Button } from "./ui/button";
 import { formatDate } from "@/lib/utils";
 import axios from "axios";
 import { auth } from "@clerk/nextjs/server";
+import SnipAction from "./SnipAction";
 
 const SnipsTable = async () => {
   const { userId } = await auth();
@@ -28,7 +27,7 @@ const SnipsTable = async () => {
     }
 
     return (
-      <Table>
+      <Table className="max-h-[40dvh] h-auto overflow-scroll">
         <TableHeader>
           <TableRow>
             <TableHead>No.</TableHead>
@@ -56,12 +55,7 @@ const SnipsTable = async () => {
                 <TableCell>{formatDate(new Date(snippet.createdAt))}</TableCell>
                 <TableCell>{snippet.description}</TableCell>
                 <TableCell>
-                  <Button
-                    className="w-4 h-4 items-center translate-y-1"
-                    variant="link"
-                  >
-                    <ExternalLinkIcon />
-                  </Button>
+                  <SnipAction snipId={snippet.id} />
                 </TableCell>
               </TableRow>
             ))

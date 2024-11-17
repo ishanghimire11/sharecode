@@ -40,3 +40,15 @@ export type SnipDataArray = {
   snippet: SnipData[];
   index: number;
 };
+
+export type DeleteSnipDialogProps = {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  handleDelete: (e: React.MouseEvent<HTMLButtonElement>) => void;
+};
+
+export type CopySnipUrlDialogProps = {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  snipID: string;
+};

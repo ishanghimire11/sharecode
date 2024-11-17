@@ -10,7 +10,7 @@ import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 import supportedLanguages from "@/lib/supportedLanguages";
 import highlight from "@/components/codeHighlight";
 import { Button } from "@/components/ui/button";
-import { CopyIcon } from "@radix-ui/react-icons";
+import { CheckIcon, CopyIcon } from "@radix-ui/react-icons";
 
 const ViewSnip = ({ params }: { params: { id: string } }) => {
   const [currentLanguage, setCurrentLanguage] = useState({
@@ -20,6 +20,7 @@ const ViewSnip = ({ params }: { params: { id: string } }) => {
     code: "",
   });
   const codeBlockRef = useRef<HTMLElement>(null);
+  const [copied, setCopied] = useState(false);
 
   const getSnippet = async () => {
     const res = await axios.get(`/api/view/${params.id}`);
@@ -53,8 +54,10 @@ const ViewSnip = ({ params }: { params: { id: string } }) => {
 
   const handleCopyClick = () => {
     const code = codeBlockRef.current?.innerText;
-
     navigator.clipboard.writeText(code || "");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+    return;
   };
 
   return (
@@ -65,13 +68,18 @@ const ViewSnip = ({ params }: { params: { id: string } }) => {
       </div>
 
       <div className="flex justify-end mb-2">
-        <Button
-          className="text-sm items-center gap-x-1 ml-auto inline-flex"
-          type="button"
-          onClick={handleCopyClick}
-        >
-          <CopyIcon className="w-4 h-5" />
-          Copy
+        <Button onClick={handleCopyClick} disabled={copied}>
+          {copied ? (
+            <>
+              <CheckIcon className="w-7 h-8" />
+              Copied
+            </>
+          ) : (
+            <>
+              <CopyIcon className="w-5 h-5" />
+              Copy
+            </>
+          )}
         </Button>
       </div>
 
